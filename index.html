@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilkhush Mujeer | Khandwa Premium Housing Shield</title>
+    <!-- Google Fonts Framework Integration -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- External CSS connected (Empty for now) -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <!-- 1. HEADER BRAND BAR -->
+    <nav class="app-header">
+        <div class="logo" onclick="showView('find')">🛡️ Dilkhush<span>Mujeer</span></div>
+        <div class="nav-links">
+            <button class="btn-nav btn-find-nav active" id="tab-discover-btn" onclick="showView('find')">Discover Rentals</button>
+            <button class="btn-nav btn-list-nav" id="tab-host-btn" onclick="showView('list')">📢 Become a Mujeer (List at ₹99)</button>
+        </div>
+    </nav>
+
+    <!-- Welcome Frame Section -->
+    <div class="hero" id="hero-banner">
+        <h1>Welcome to <span>Dilkhush Mujeer</span></h1>
+        <p>Khandwa's secure rental portal. Instantly browse verified homes, departments, or rooms without any brokerage middleman.</p>
+    </div>
+
+    <div class="container">
+        <!-- VIEW 1: DISCOVER MARKETPLACE INTERFACE -->
+        <div id="portal-discover-view">
+            <!-- Advanced Filters Block -->
+            <div class="search-engine">
+                <div class="filter-cell">
+                    <label>Locality Sector</label>
+                    <select id="searchLoc">
+                        <option value="all">All Localities (Khandwa)</option>
+                        <option value="Khansawali">Khansawali</option>
+                        <option value="Gulmohar">Gulmohar Colony</option>
+                        <option value="Ghar Pura">Ghar Pura</option>
+                        <option value="Imlipura">Imlipura</option>
+                        <option value="Rameshwar">Rameshwar Area</option>
+                        <option value="Ganeshtalai">Ganeshtalai</option>
+                        <option value="Padawa">Padawa Crossing</option>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>Architecture Category</label>
+                    <select id="searchCategory">
+                        <option value="all">All Categories</option>
+                        <option value="Home">Home</option>
+                        <option value="Department">Department</option>
+                        <option value="Room">Room</option>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>Stay Timeline</label>
+                    <select id="searchDuration">
+                        <option value="all">Any Timeline Contract</option>
+                        <option value="1 Day">1 Day</option>
+                        <option value="1-8 Days">1-8 Days</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="More than 3 Months">More than 3 Months</option>
+                    </select>
+                </div>
+                <button class="btn-search-trigger" onclick="applySearchFilters()">Apply Filters</button>
+            </div>
+
+            <div class="grid-header">
+                <span>Verified Live Showcases</span>
+            </div>
+
+            <!-- Public listings container matrix -->
+            <div class="listings-grid" id="listingsContainer"></div>
+        </div>
+
+        <!-- VIEW 2: HOST REGISTRATION FORM INTERFACE -->
+        <div id="view-landlord-form" class="form-section">
+            <h2>Register as a Mujeer (Host)</h2>
+            <p>Fill complete house metrics safely. Real-time encryption active.</p>
+            <form id="propertyForm" onsubmit="triggerPaymentModal(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Mujeer Name</label>
+                        <input type="text" id="formOwner" required placeholder="e.g. Ramesh Kumar">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Phone</label>
+                        <input type="tel" id="formPhone" required placeholder="e.g. 98270XXXXX" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Property Title</label>
+                        <input type="text" id="formTitle" required placeholder="e.g. Fully Furnished 2 BHK House">
+                    </div>
+                    <div class="form-group">
+                        <label>House / Flat No.</label>
+                        <input type="text" id="formHouseNo" required placeholder="e.g. House No. 24/A">
+                    </div>
+                    <div class="form-group">
+                        <label>Locality Sector</label>
+                        <select id="formLoc" required>
+                            <option value="Khansawali">Khansawali</option>
+                            <option value="Gulmohar">Gulmohar Colony</option>
+                            <option value="Ghar Pura">Ghar Pura</option>
+                            <option value="Imlipura">Imlipura</option>
+                            <option value="Rameshwar">Rameshwar Area</option>
+                            <option value="Ganeshtalai">Ganeshtalai</option>
+                            <option value="Padawa">Padawa Crossing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Layout</label>
+                        <select id="formType" required>
+                            <option value="Home">Home</option>
+                            <option value="Department">Department</option>
+                            <option value="Room">Room</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stay Timeline</label>
+                        <select id="formDuration" required>
+                            <option value="1 Day">1 Day</option>
+                            <option value="1-8 Days">1-8 Days</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="More than 3 Months">More than 3 Months</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Rent (INR)</label>
+                        <input type="number" id="formRent" required placeholder="e.g. 4500">
+                    </div>
+                    <div class="form-group">
+                        <label>Landmark</label>
+                        <input type="text" id="formLandmark" required placeholder="e.g. Near SN College">
+                    </div>
+                    <div class="form-group">
+                        <label>Bachelors Allowed?</label>
+                        <select id="formBachelors" required>
+                            <option value="Allowed">Yes, Allowed</option>
+                            <option value="Families Only">No, Families Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Image URL (Optional)</label>
+                        <input type="url" id="formImgUrl" placeholder="Paste image link or leave blank">
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit-gateway">Secure Checkout (Explicit Fee ₹99)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SECRET ADMIN SUPERVISION PANE PANEL -->
+    <div class="admin-pane">
+        <div class="admin-inner">
+            <div class="admin-header">
+                <h3>🔒 Admin Moderation Dashboard</h3>
+                <span class="security-protocol-badge">Mujeer Protocol Active</span>
+            </div>
+            <div class="admin-grid" id="adminQueueContainer"></div>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL 1: CHECKOUT NODE -->
+    <div class="modal" id="gatewayPaymentModal">
+        <div class="modal-content">
+            <span style="font-size:52px;">🛡️</span>
+            <h3>Gateway Node Checkout</h3>
+            <button class="btn-pay-now" onclick="confirmPaymentAndSendToAdmin()">Confirm Payment & Grant Anumati</button>
+            <button class="btn-abort-transaction" style="margin-top:15px; border:none; background:none; cursor:pointer;" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL 2: SPECIFICATIONS INSIGHT SHEET -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content" style="text-align: left;">
+            <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px; margin-bottom:15px; text-align:center;">🏠 Mujeer Specifications</h3>
+            <div id="detailsModalContent"></div>
+            <button class="btn-pay-now" style="margin-top:25px;" onclick="closeDetailsModal()">Close File</button>
+        </div>
+    </div>
+
+    <!-- External Script Connected (Empty for now) -->
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -9,12 +9,12 @@
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
-    <!-- 🔗 CONNECTING STANDALONE STYLES SHEET -->
+    <!-- External CSS connected (Empty for now) -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-    <!-- Top Navigation Header -->
+    <!-- 1. HEADER BRAND BAR -->
     <nav class="app-header">
         <div class="logo" onclick="showView('find')">🛡️ Dilkhush<span>Mujeer</span></div>
         <div class="nav-links">
@@ -64,15 +64,6 @@
                         <option value="1-8 Days">1-8 Days</option>
                         <option value="Monthly">Monthly</option>
                         <option value="More than 3 Months">More than 3 Months</option>
-                    </select>
-                </div>
-                <div class="filter-cell">
-                    <label>Maximum Budget (INR)</label>
-                    <select id="searchBudget">
-                        <option value="all">No Limit</option>
-                        <option value="2000">Under ₹2,000</option>
-                        <option value="5000">Under ₹5,000</option>
-                        <option value="10000">Under ₹10,000</option>
                     </select>
                 </div>
                 <button class="btn-search-trigger" onclick="applySearchFilters()">Apply Filters</button>
@@ -129,7 +120,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Stay Timeline Mode</label>
+                        <label>Stay Timeline</label>
                         <select id="formDuration" required>
                             <option value="1 Day">1 Day</option>
                             <option value="1-8 Days">1-8 Days</option>
@@ -142,7 +133,7 @@
                         <input type="number" id="formRent" required placeholder="e.g. 4500">
                     </div>
                     <div class="form-group">
-                        <label>Nearby Landmark</label>
+                        <label>Landmark</label>
                         <input type="text" id="formLandmark" required placeholder="e.g. Near SN College">
                     </div>
                     <div class="form-group">
@@ -153,11 +144,11 @@
                         </select>
                     </div>
                     <div class="form-group full-width">
-                        <label>House Image URL Link (Optional)</label>
-                        <input type="url" id="formImgUrl" placeholder="Paste image address link or leave blank">
+                        <label>Image URL (Optional)</label>
+                        <input type="url" id="formImgUrl" placeholder="Paste image link or leave blank">
                     </div>
                 </div>
-                <button type="submit" class="btn-submit-gateway">Secure Checkout to Live (₹99)</button>
+                <button type="submit" class="btn-submit-gateway">Secure Checkout (Explicit Fee ₹99)</button>
             </form>
         </div>
     </div>
@@ -173,18 +164,26 @@
         </div>
     </div>
 
-    <!-- 🛠️ POPUP MODAL 1: CHECKOUT NODE (100% FIXED BOX LAYOUT) -->
+    <!-- POPUP MODAL 1: CHECKOUT NODE -->
     <div class="modal" id="gatewayPaymentModal">
         <div class="modal-content">
-            <span style="font-size:42px;">🛡️</span>
-            <h3>Scan QR Code to Pay ₹99</h3>
-            <p style="color: var(--text-muted); font-size:13px; margin: 5px 0 15px;">Dilkhush Mujeer Security Hub</p>
-            
-            <!-- QR Frame -->
-            <div style="background: white; padding: 15px; border-radius: 12px; width: 200px; height: 200px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                <img id="myUpiQrCode" src="https://qrserver.com Listing Fee" alt="Scan QR" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            
-            <!-- Input Field Box -->
-            <div style="text-align: left; margin-bottom: 20px;">
+            <span style="font-size:52px;">🛡️</span>
+            <h3>Gateway Node Checkout</h3>
+            <button class="btn-pay-now" onclick="confirmPaymentAndSendToAdmin()">Confirm Payment & Grant Anumati</button>
+            <button class="btn-abort-transaction" style="margin-top:15px; border:none; background:none; cursor:pointer;" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
 
+    <!-- POPUP MODAL 2: SPECIFICATIONS INSIGHT SHEET -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content" style="text-align: left;">
+            <h3 style="border-bottom:1px solid #ccc; padding-bottom:10px; margin-bottom:15px; text-align:center;">🏠 Mujeer Specifications</h3>
+            <div id="detailsModalContent"></div>
+            <button class="btn-pay-now" style="margin-top:25px;" onclick="closeDetailsModal()">Close File</button>
+        </div>
+    </div>
+
+    <!-- External Script Connected (Empty for now) -->
+    <script src="script.js"></script>
+</body>
+</html>
